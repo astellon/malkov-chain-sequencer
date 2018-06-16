@@ -5,6 +5,8 @@
               pluginRTASCategory="0">
   <MAINGROUP id="pVJT3X" name="malkov">
     <GROUP id="{350CBADB-4838-EBF0-FCA0-AA8DBF544838}" name="Source">
+      <FILE id="JHT4gM" name="mcs.cpp" compile="1" resource="0" file="Source/mcs.cpp"/>
+      <FILE id="FehOii" name="mcs.h" compile="0" resource="0" file="Source/mcs.h"/>
       <FILE id="HGKV3a" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="evggOG" name="PluginProcessor.h" compile="0" resource="0"

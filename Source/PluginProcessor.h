@@ -12,6 +12,8 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
+#include "mcs.h"
+
 //==============================================================================
 /**
 */
@@ -55,7 +57,10 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    MalkovChainSequencer* getSequencer() { return &mcs_; }
+
 private:
+    MalkovChainSequencer mcs_;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MalkovAudioProcessor)
 };
