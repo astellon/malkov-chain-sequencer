@@ -23,6 +23,28 @@ void MalkovChainSequencer::readMidiFile() {
     FileInputStream fis(file);
     midi_.clear();
     midi_.readFrom(fis);
+    analyse();
+  }
+}
+
+void MalkovChainSequencer::analyse() {
+  double secons_per_quarter_note;
+  midi_.convertTimestampTicksToSeconds();
+  auto num_tracks = midi_.getNumTracks();
+
+  for (int i = 0; i != num_tracks; i++) {
+    auto mseq = midi_.getTrack(i);
+    auto num_events = mseq->getNumEvents();
+    for (int j = 0; j != num_events; j++) {
+      auto msg = mseq->getEventPointer(j)->message;
+      if (msg.isNoteOn()) {
+        // note on event
+      } else if (msg.isNoteOff()) {
+        // note off event
+      } else if (msg.isTempoMetaEvent()) {
+        secons_per_quarter_note = msg.getTempoSecondsPerQuarterNote();
+      }
+    }
   }
 }
 
