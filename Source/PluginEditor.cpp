@@ -20,12 +20,9 @@ MalkovAudioProcessorEditor::MalkovAudioProcessorEditor (MalkovAudioProcessor& p)
     setSize (800, 600);
     choose_button_.setName("choose_button");
     choose_button_.setButtonText("Choose MIDI File to analyse");
-    addAndMakeVisible(choose_button_);
-
-    log_.setReadOnly(true);
-    log_.setMultiLine(true);
-    addAndMakeVisible(log_);
     choose_button_.addListener(processor.getSequencer());
+    addAndMakeVisible(choose_button_);
+    addAndMakeVisible(log_);
 }
 
 MalkovAudioProcessorEditor::~MalkovAudioProcessorEditor()

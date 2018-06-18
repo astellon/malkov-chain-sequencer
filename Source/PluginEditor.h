@@ -13,6 +13,8 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 
+#include "logwindow.h"
+
 //==============================================================================
 /**
 */
@@ -32,7 +34,7 @@ private:
     MalkovAudioProcessor& processor;
 
     TextButton choose_button_;
-    TextEditor log_;
+    LogWindow log_;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MalkovAudioProcessorEditor)
 };

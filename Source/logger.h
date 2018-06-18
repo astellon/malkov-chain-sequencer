@@ -4,6 +4,9 @@
 #include <string>
 #include <vector>
 
+
+namespace MyLogger{
+
 class LogOutput {
  public:
   virtual ~LogOutput(){};
@@ -34,3 +37,5 @@ class Logger {
   ErrOut err;
   std::vector<LogOutput*> outputs_;
 };
+
+}  // MyLogger namespace
