@@ -6,8 +6,8 @@
 
 class LogOutput {
  public:
-  virtual LogOutput();
-  virtual log(std::string& str) = 0;
+  virtual ~LogOutput(){};
+  virtual void log(std::string& str) = 0;
 };
 
 class ErrOut : public LogOutput {
@@ -20,7 +20,7 @@ class ErrOut : public LogOutput {
 class Logger {
 
  public:
-  Log() {
+  Logger() {
     outputs_.push_back(&err);
   }
 
