@@ -6987,6 +6987,8 @@ mcs.h
 /home/astellon/workspace/malkov-chain-sequencer/Source/mcs.h
 ../JuceLibraryCode/JuceHeader.h
 /home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/JuceHeader.h
+logger.h
+/home/astellon/workspace/malkov-chain-sequencer/Source/logger.h
 
 /usr/include/atk-1.0/atk/atk-enum-types.h
 atk/atkversion.h

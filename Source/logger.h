@@ -10,12 +10,12 @@ namespace MyLogger{
 class LogOutput {
  public:
   virtual ~LogOutput(){};
-  virtual void log(std::string& str) = 0;
+  virtual void log(const std::string& str) = 0;
 };
 
 class ErrOut : public LogOutput {
  public:
-  void log(std::string& str) override {
+  void log(const std::string& str) override {
     std::cerr << str << std::endl;
   }
 };
@@ -27,10 +27,14 @@ class Logger {
     outputs_.push_back(&err);
   }
 
-  void log(std::string& str) {
+  void log(const std::string& str) {
     for (auto out : outputs_) {
       out->log(str);
     }
+  }
+
+  void addOutput(LogOutput* out) {
+    outputs_.push_back(out);
   }
 
  private:

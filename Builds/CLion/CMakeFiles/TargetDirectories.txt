@@ -1,3 +1,4 @@
 /home/astellon/workspace/malkov-chain-sequencer/Builds/CLion/CMakeFiles/rebuild_cache.dir
-/home/astellon/workspace/malkov-chain-sequencer/Builds/CLion/CMakeFiles/SHARED_CODE.dir
 /home/astellon/workspace/malkov-chain-sequencer/Builds/CLion/CMakeFiles/edit_cache.dir
+/home/astellon/workspace/malkov-chain-sequencer/Builds/CLion/CMakeFiles/STANDALONE_PLUGIN.dir
+/home/astellon/workspace/malkov-chain-sequencer/Builds/CLion/CMakeFiles/SHARED_CODE.dir

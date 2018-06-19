@@ -7001,5 +7001,6 @@ CMakeFiles/SHARED_CODE.dir/home/astellon/workspace/malkov-chain-sequencer/Source
  ../../JuceLibraryCode/modules/juce_video/playback/juce_VideoComponent.h
  /home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/AppConfig.h
  /home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/JuceHeader.h
+ /home/astellon/workspace/malkov-chain-sequencer/Source/logger.h
  /home/astellon/workspace/malkov-chain-sequencer/Source/mcs.cpp
  /home/astellon/workspace/malkov-chain-sequencer/Source/mcs.h

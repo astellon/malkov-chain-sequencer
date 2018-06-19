@@ -15,7 +15,8 @@ class LogWindow : public MyLogger::LogOutput, public juce::TextEditor {
     setCaretVisible(false);
   }
 
-  void log(std::string& str) override {
+
+  void log(const std::string& str) override {
     insertTextAtCaret(str);
   }
 };

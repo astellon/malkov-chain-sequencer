@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named STANDALONE_PLUGIN
+
+# Build rule for target.
+STANDALONE_PLUGIN: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 STANDALONE_PLUGIN
+.PHONY : STANDALONE_PLUGIN
+
+# fast build rule for target.
+STANDALONE_PLUGIN/fast:
+	$(MAKE) -f CMakeFiles/STANDALONE_PLUGIN.dir/build.make CMakeFiles/STANDALONE_PLUGIN.dir/build
+.PHONY : STANDALONE_PLUGIN/fast
+
+#=============================================================================
 # Target rules for targets named SHARED_CODE
 
 # Build rule for target.
@@ -203,6 +216,33 @@ home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audi
 home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_formats.cpp.s:
 	$(MAKE) -f CMakeFiles/SHARED_CODE.dir/build.make CMakeFiles/SHARED_CODE.dir/home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_formats.cpp.s
 .PHONY : home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_formats.cpp.s
+
+home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.o: home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp.o
+
+.PHONY : home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.o
+
+# target to build an object file
+home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp.o:
+	$(MAKE) -f CMakeFiles/STANDALONE_PLUGIN.dir/build.make CMakeFiles/STANDALONE_PLUGIN.dir/home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp.o
+.PHONY : home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp.o
+
+home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.i: home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp.i
+
+.PHONY : home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.i
+
+# target to preprocess a source file
+home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp.i:
+	$(MAKE) -f CMakeFiles/STANDALONE_PLUGIN.dir/build.make CMakeFiles/STANDALONE_PLUGIN.dir/home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp.i
+.PHONY : home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp.i
+
+home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.s: home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp.s
+
+.PHONY : home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.s
+
+# target to generate assembly for a file
+home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp.s:
+	$(MAKE) -f CMakeFiles/STANDALONE_PLUGIN.dir/build.make CMakeFiles/STANDALONE_PLUGIN.dir/home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp.s
+.PHONY : home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp.s
 
 home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_utils.o: home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_utils.cpp.o
 
@@ -616,8 +656,9 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... SHARED_CODE"
 	@echo "... edit_cache"
+	@echo "... STANDALONE_PLUGIN"
+	@echo "... SHARED_CODE"
 	@echo "... home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_basics.o"
 	@echo "... home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_basics.i"
 	@echo "... home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_basics.s"
@@ -627,6 +668,9 @@ help:
 	@echo "... home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_formats.o"
 	@echo "... home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_formats.i"
 	@echo "... home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_formats.s"
+	@echo "... home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.o"
+	@echo "... home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.i"
+	@echo "... home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_Standalone.s"
 	@echo "... home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_utils.o"
 	@echo "... home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_utils.i"
 	@echo "... home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/include_juce_audio_plugin_client_utils.s"

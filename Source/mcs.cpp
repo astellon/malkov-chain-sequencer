@@ -1,10 +1,14 @@
+#include <string>
+
 #include "mcs.h"
 
 MalkovChainSequencer::MalkovChainSequencer() {
+  log("Start MalKovChainSequencer");
   // empty now
 }
 
 MalkovChainSequencer::~MalkovChainSequencer() {
+  log("End MalKovChainSequencer");
   // empty now
 }
 
@@ -28,23 +32,37 @@ void MalkovChainSequencer::readMidiFile() {
 }
 
 void MalkovChainSequencer::analyse() {
-  double secons_per_quarter_note;
+  log("Start analysis");
+  
+  double seconds_per_quarter_note;
   midi_.convertTimestampTicksToSeconds();
   auto num_tracks = midi_.getNumTracks();
 
+  log("Num Tracks = " + std::to_string(num_tracks));
+  log("Start reading MIDI ...");
+  log("============================================");
+
   for (int i = 0; i != num_tracks; i++) {
+    log("Read Track: " + std::to_string(i));
     auto mseq = midi_.getTrack(i);
     auto num_events = mseq->getNumEvents();
     for (int j = 0; j != num_events; j++) {
       auto msg = mseq->getEventPointer(j)->message;
       if (msg.isNoteOn()) {
-        // note on event
+        log("NOTEON: NoteNumber:" + std::to_string(msg.getNoteNumber()) + " at: " + std::to_string(msg.getTimeStamp()));
       } else if (msg.isNoteOff()) {
-        // note off event
+        log("NOTEOFF: NoteNumber:" + std::to_string(msg.getNoteNumber()) + " at: " + std::to_string(msg.getTimeStamp()));
       } else if (msg.isTempoMetaEvent()) {
-        secons_per_quarter_note = msg.getTempoSecondsPerQuarterNote();
+        seconds_per_quarter_note = msg.getTempoSecondsPerQuarterNote();
+        log("TEMPO: Sec/QuarterNote: " + std::to_string(seconds_per_quarter_note));
       }
     }
   }
+  log("============================================");
+  log("End reading MIDI");
+}
+
+void MalkovChainSequencer::log(const std::string& str) {
+  logger_.log(str);
 }
 

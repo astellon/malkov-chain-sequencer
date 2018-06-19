@@ -7000,6 +7000,7 @@ CMakeFiles/SHARED_CODE.dir/home/astellon/workspace/malkov-chain-sequencer/Source
 CMakeFiles/SHARED_CODE.dir/home/astellon/workspace/malkov-chain-sequencer/Source/mcs.cpp.o: ../../JuceLibraryCode/modules/juce_video/playback/juce_VideoComponent.h
 CMakeFiles/SHARED_CODE.dir/home/astellon/workspace/malkov-chain-sequencer/Source/mcs.cpp.o: /home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/AppConfig.h
 CMakeFiles/SHARED_CODE.dir/home/astellon/workspace/malkov-chain-sequencer/Source/mcs.cpp.o: /home/astellon/workspace/malkov-chain-sequencer/JuceLibraryCode/JuceHeader.h
+CMakeFiles/SHARED_CODE.dir/home/astellon/workspace/malkov-chain-sequencer/Source/mcs.cpp.o: /home/astellon/workspace/malkov-chain-sequencer/Source/logger.h
 CMakeFiles/SHARED_CODE.dir/home/astellon/workspace/malkov-chain-sequencer/Source/mcs.cpp.o: /home/astellon/workspace/malkov-chain-sequencer/Source/mcs.cpp
 CMakeFiles/SHARED_CODE.dir/home/astellon/workspace/malkov-chain-sequencer/Source/mcs.cpp.o: /home/astellon/workspace/malkov-chain-sequencer/Source/mcs.h
 

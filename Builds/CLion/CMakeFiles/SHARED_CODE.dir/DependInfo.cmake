@@ -36,7 +36,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
   "JucePlugin_Build_AU=0"
   "JucePlugin_Build_AUv3=0"
   "JucePlugin_Build_RTAS=0"
-  "JucePlugin_Build_Standalone=0"
+  "JucePlugin_Build_Standalone=1"
   "JucePlugin_Build_Unity=0"
   "JucePlugin_Build_VST3=0"
   "JucePlugin_Build_VST=0"
