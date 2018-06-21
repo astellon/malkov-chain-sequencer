@@ -1,15 +1,14 @@
 #include <string>
+#include <iostream>
 
 #include "mcs.h"
 
-MalkovChainSequencer::MalkovChainSequencer() {
+MalkovChainSequencer::MalkovChainSequencer() : is_pressed_(false), last_note_(-1) {
   log("Start MalKovChainSequencer");
-  // empty now
 }
 
 MalkovChainSequencer::~MalkovChainSequencer() {
   log("End MalKovChainSequencer");
-  // empty now
 }
 
 void MalkovChainSequencer::buttonClicked(Button* button) {
@@ -54,29 +53,29 @@ void MalkovChainSequencer::analyse() {
       for (int k = 0; k != num_events; k++) {
         auto msg = achan.getEventPointer(k)->message;
         if (msg.isNoteOn()) {
-          log("  NOTEON: NoteNumber: "
-            + msg.getMidiNoteName(msg.getNoteNumber(), true, true, 4).toStdString()
-            + " at: " + std::to_string(msg.getTimeStamp())
-          );
+
         } else if (msg.isNoteOff()) {
-          log(" NOTEOFF: NoteNumber: "
-            + msg.getMidiNoteName(msg.getNoteNumber(), true, true, 4).toStdString()
-            + " at: " + std::to_string(msg.getTimeStamp())
-          );
+
         } else if (msg.isTempoMetaEvent()) {
           seconds_per_quarter_note = msg.getTempoSecondsPerQuarterNote();
-          log("   TEMPO: Sec/QuarterNote: "
-            + std::to_string(seconds_per_quarter_note)
-          );
         }
       }
     }
   }
   log("============================================");
   log("End reading MIDI");
+  showTT();
 }
 
 void MalkovChainSequencer::log(const std::string& str) {
   logger_.log(str);
 }
 
+void MalkovChainSequencer::showTT() {
+  for (int i = 0; i < 129; i++) {
+    for (int j = 0; j < 129; j++) {
+      std::cout << transition_table_[i][j] << " ";
+    }
+    std::cout << std::endl;
+  }
+}
