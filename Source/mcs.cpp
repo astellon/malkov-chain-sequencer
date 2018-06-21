@@ -54,7 +54,7 @@ void MalkovChainSequencer::analyse() {
         auto msg = achan.getEventPointer(k)->message;
         if (msg.isNoteOn()) {
 
-        } else if (msg.isNoteOff()) {
+        } else if (msg.isNoteOdff()) {
 
         } else if (msg.isTempoMetaEvent()) {
           seconds_per_quarter_note = msg.getTempoSecondsPerQuarterNote();
