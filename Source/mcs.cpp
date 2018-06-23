@@ -53,18 +53,56 @@ void MalkovChainSequencer::analyse() {
       for (int k = 0; k != num_events; k++) {
         auto msg = achan.getEventPointer(k)->message;
         if (msg.isNoteOn()) {
+          if (!is_pressed_) {
+            int n = msg.getNoteNumber();
+            double t = msg.getTimeStamp();
+            int length = (t-last_time_)/seconds_per_quarter_note*4;
+            
+            if (length < 1) {
+              // direcct transition
+              transition_table_[last_note_][n]++;
+            } else {
+              transition_table_[last_note_][129]++;
+              transition_table_[129][129] += length - 1;
+              transition_table_[129][n]++;
+            }
 
-        } else if (msg.isNoteOdff()) {
-
+            is_pressed_ = true;
+            last_note_ = n;
+            last_time_ = t;
+          }
+        } else if (msg.isNoteOff()) {
+          int n = msg.getNoteNumber();
+          if (last_note_ == n) {
+            double t = msg.getTimeStamp();
+            int length = (t-last_time_)/seconds_per_quarter_note*4;
+            if (length > 1) {
+              transition_table_[n][128]++;
+              transition_table_[128][128] += length - 2;
+              n = 128;
+            }
+            is_pressed_ = false;
+            last_note_ = n;
+            last_time_ = t;
+          }
         } else if (msg.isTempoMetaEvent()) {
           seconds_per_quarter_note = msg.getTempoSecondsPerQuarterNote();
         }
       }
     }
   }
+  processTT();
   log("============================================");
   log("End reading MIDI");
   showTT();
+}
+
+void MalkovChainSequencer::processTT() {
+  for (int i = 0; i < 130; i++) {
+    for (int j = 0; j < 130-1; j++) {
+      transition_table_[i][j+1] = transition_table_[i][j]+transition_table_[i][j+1];
+    }
+  }
 }
 
 void MalkovChainSequencer::log(const std::string& str) {
@@ -72,8 +110,8 @@ void MalkovChainSequencer::log(const std::string& str) {
 }
 
 void MalkovChainSequencer::showTT() {
-  for (int i = 0; i < 129; i++) {
-    for (int j = 0; j < 129; j++) {
+  for (int i = 0; i < 130; i++) {
+    for (int j = 0; j < 130; j++) {
       std::cout << transition_table_[i][j] << " ";
     }
     std::cout << std::endl;
