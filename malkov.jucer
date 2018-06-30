@@ -5,8 +5,8 @@
               pluginRTASCategory="0" pluginFormats="buildStandalone,buildVST3">
   <MAINGROUP id="pVJT3X" name="malkov">
     <GROUP id="{350CBADB-4838-EBF0-FCA0-AA8DBF544838}" name="Source">
-      <FILE id="TjE2Q2" name="logger.h" compile="0" resource="0" file="Source/logger.h"/>
-      <FILE id="DhUF3Z" name="logwindow.h" compile="0" resource="0" file="Source/logwindow.h"/>
+      <FILE id="OVwsMH" name="analyser.cpp" compile="1" resource="0" file="Source/analyser.cpp"/>
+      <FILE id="WGcQFp" name="analyser.h" compile="0" resource="0" file="Source/analyser.h"/>
       <FILE id="heblEL" name="mcs.cpp" compile="1" resource="0" file="Source/mcs.cpp"/>
       <FILE id="vnGec8" name="mcs.h" compile="0" resource="0" file="Source/mcs.h"/>
       <FILE id="y246fS" name="PluginEditor.cpp" compile="1" resource="0"

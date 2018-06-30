@@ -442,6 +442,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\analyser.cpp">
+      <Filter>malkov\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\mcs.cpp">
       <Filter>malkov\Source</Filter>
     </ClCompile>
@@ -2409,10 +2412,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\logger.h">
-      <Filter>malkov\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\logwindow.h">
+    <ClInclude Include="..\..\Source\analyser.h">
       <Filter>malkov\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\mcs.h">
