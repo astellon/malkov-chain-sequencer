@@ -37,7 +37,7 @@ void Analyser::analyse(TransitionTable* tt, const MidiMessageSequence& midi, dou
   bool is_pressed = false;
   int last_note = -1;
   double last_time = 0;
-  double max_rest = 0;
+  int max_rest = 0;
 
   auto num_events = midi.getNumEvents();
   for (int k = 0; k != num_events; k++) {
@@ -47,6 +47,8 @@ void Analyser::analyse(TransitionTable* tt, const MidiMessageSequence& midi, dou
         int n = msg.getNoteNumber();
         double t = msg.getTimeStamp();
         int length = (t-last_time)/seconds_per_quarter_note/step;
+
+        std::cerr << length << " " << max_rest << std::endl;
         
         if (last_note == -1) {
           (*tt)[last_note][n]++;
@@ -55,7 +57,7 @@ void Analyser::analyse(TransitionTable* tt, const MidiMessageSequence& midi, dou
         } else if (length > max_rest) {
           (*tt)[last_note][REST]++;
           (*tt)[REST][REST] += (int)max_rest - 1;
-          (*tt)[REST][n]++;
+          (*tt)[-1][n]++;
         } else {
           (*tt)[last_note][REST]++;
           (*tt)[REST][REST] += length - 1;
@@ -82,7 +84,7 @@ void Analyser::analyse(TransitionTable* tt, const MidiMessageSequence& midi, dou
       }
     } else if (msg.isTempoMetaEvent()) {
       seconds_per_quarter_note = msg.getTempoSecondsPerQuarterNote();
-      max_rest = seconds_per_quarter_note * 4 * MAX_REST_LENGTH;
+      max_rest = 4 * MAX_REST_LENGTH;
     }
   }
 }
