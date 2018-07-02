@@ -3,12 +3,7 @@
 
 #include "mcs.h"
 
-MalkovChainSequencer::MalkovChainSequencer() : step_(0.25) {
-  // tt_ = new int*[MCS::SIZE];
-  // for (int i = 0; i < MCS::SIZE; i++) {
-  //   tt_[i] = new int[MCS::SIZE]();
-  // }
-}
+MalkovChainSequencer::MalkovChainSequencer() : step_(0.25) {}
 
 MalkovChainSequencer::~MalkovChainSequencer() {}
 
