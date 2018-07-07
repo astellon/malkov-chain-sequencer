@@ -47,9 +47,6 @@ void Analyser::analyse(TransitionTable* tt, const MidiMessageSequence& midi, dou
         int n = msg.getNoteNumber();
         double t = msg.getTimeStamp();
         int length = (t-last_time)/seconds_per_quarter_note/step;
-
-        std::cerr << length << " " << max_rest << std::endl;
-        
         if (last_note == -1) {
           (*tt)[last_note][n]++;
         } else if (length < 1) {
@@ -90,11 +87,7 @@ void Analyser::analyse(TransitionTable* tt, const MidiMessageSequence& midi, dou
 }
 
 void Analyser::processTT(TransitionTable* tt) {
-  for (int i = 0; i < 130; i++) {
-    for (int j = 0; j < 130-1; j++) {
-      (*tt)[i][j+1] = (*tt)[i][j]+(*tt)[i][j+1];
-    }
-  }
+  // no process
 }
 
 }  // namespace MCS

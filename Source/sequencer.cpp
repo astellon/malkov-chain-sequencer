@@ -1,3 +1,5 @@
+#include <random>
+
 #include "sequencer.h"
 
 namespace MCS {
@@ -20,6 +22,21 @@ void Sequencer::setStep(double step) {
   seconds_per_step_  = 60 / bpm_ * step;
 }
 
+void Sequencer::setTT(TransitionTable* tt) {
+  tt_.clear();
+  for (auto dists : *tt) {
+    int start = dists.first;
+    int prev = 0;
+    for (auto dist : dists.second) {
+      int n = dist.second + prev;
+      tt_[start][n] = dist.first;
+      prev = n;
+    }
+    tt_[start][-1] = prev;
+  }
+  showTT();
+}
+
 void Sequencer::process(MidiBuffer* midi) {
   if (time_ + seconds_per_block_ > seconds_per_step_) {
     time_ = seconds_per_step_ - time_;
@@ -29,20 +46,22 @@ void Sequencer::process(MidiBuffer* midi) {
 }
 
 void Sequencer::goNextStep(MidiBuffer* midi) {
-  int ofset = time_ / sample_rate_;
+  int offset = time_ / sample_rate_;
   switch (state_) {
     case StepState::started:
       note_ = transition(-1);
-      midi.addEvent(MidiMessage.noteOn(1, note_, offset), offset);
+      // if note is rest or sustain
+      midi->addEvent(MidiMessage::noteOn(1, note_, 1.0f), offset);
       state_ = StepState::playing;
       break;
     case StepState::playing:
-      midi.addEvent(MidiMessage.noteOff(1, note_), offset);
+      midi->addEvent(MidiMessage::noteOff(1, note_), offset);
       note_ = transition(note_);
-      midi.addEvent(MidiMessage.noteOn(1, note_, offset), offset);
+      // if note is rest or sustain
+      midi->addEvent(MidiMessage::noteOn(1, note_, 1.0f), offset);
       break;
-    case StepState::stoped:
-      midi.addEvent(MidiMessage.noteOff(1, note_), offset);
+    case StepState::stopped:
+      midi->addEvent(MidiMessage::noteOff(1, note_), offset);
       note_ = -1;
       state_ = StepState::stop;
       break;
@@ -53,7 +72,23 @@ void Sequencer::goNextStep(MidiBuffer* midi) {
 }
 
 int Sequencer::transition(int num) {
-  return 66;
+  int n = tt_[num][-1];
+  std::random_device seed_gen;
+  std::default_random_engine engine(seed_gen());
+  std::uniform_int_distribution<> dist(1, n);
+  n = dist(engine);
+  auto to = tt_[num].lower_bound(n);
+  return to->second;
+}
+
+void Sequencer::showTT() {
+  for (auto row : tt_) {
+    std::cout << row.first << ": ";
+    for (auto value : row.second) {
+      std::cout << "->(" << value.first << ": " << value.second << ") ";
+    }
+    std::cout << std::endl;
+  }
 }
 
 }  // namespace MCS

@@ -13,6 +13,10 @@ void MalkovChainSequencer::buttonClicked(Button* button) {
   }
 }
 
+void MalkovChainSequencer::process(MidiBuffer* midi) {
+  seq_.process(midi);
+}
+
 void MalkovChainSequencer::readMidiFile() {
 
   FileChooser chooser("Choose MIDI File", File::nonexistent, "*.mid");
@@ -29,6 +33,7 @@ void MalkovChainSequencer::readMidiFile() {
 
 void MalkovChainSequencer::analyse() {
   analyser_.analyse(&tt_, step_);
+  seq_.setTT(&tt_);
   showTT();
 }
 

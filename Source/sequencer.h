@@ -13,7 +13,7 @@ class Sequencer {
     playing,
     stopped,
     stop
-  }
+  };
 
   Sequencer();
 
@@ -21,14 +21,14 @@ class Sequencer {
   void setBPM(double bpm);
   void setStep(double step);
 
-  void setTT(TransitionTable* tt) { tt_ = tt; }
+  void setTT(TransitionTable* tt);
 
   void start() { state_ = StepState::started; }
   void stop() { state_ = StepState::stopped; }
 
   void process(MidiBuffer* midi);
  private:
-  TransitionTable* tt_;
+  TransitionTable tt_;
   double sample_rate_, bpm_, step_;
   double seconds_per_block_;
   double seconds_per_step_;
@@ -38,6 +38,7 @@ class Sequencer {
 
   void goNextStep(MidiBuffer* midi);
   int transition(int num);
+  void showTT();
 };
 
 }  // namespace MCS

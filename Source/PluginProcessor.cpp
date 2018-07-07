@@ -97,6 +97,7 @@ void MalkovAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    mcs_.setSampleRate(sampleRate, samplesPerBlock);
 }
 
 void MalkovAudioProcessor::releaseResources()

@@ -12,6 +12,8 @@
       <FILE id="y246fS" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="ID0Lg2" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="v7qD7B" name="sequencer.cpp" compile="1" resource="0" file="Source/sequencer.cpp"/>
+      <FILE id="kSoqDG" name="sequencer.h" compile="0" resource="0" file="Source/sequencer.h"/>
       <FILE id="FVFP73" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="plKyVK" name="PluginProcessor.h" compile="0" resource="0"

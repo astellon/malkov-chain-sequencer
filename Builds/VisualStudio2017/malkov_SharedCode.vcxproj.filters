@@ -451,6 +451,9 @@
     <ClCompile Include="..\..\Source\PluginEditor.cpp">
       <Filter>malkov\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\sequencer.cpp">
+      <Filter>malkov\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp">
       <Filter>malkov\Source</Filter>
     </ClCompile>
@@ -2419,6 +2422,9 @@
       <Filter>malkov\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PluginEditor.h">
+      <Filter>malkov\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\sequencer.h">
       <Filter>malkov\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PluginProcessor.h">
