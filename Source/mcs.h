@@ -32,4 +32,5 @@ class MalkovChainSequencer : public juce::Button::Listener {
   void readMidiFile();
   void analyse();
   void showTT();
+  void exportTT();
 };

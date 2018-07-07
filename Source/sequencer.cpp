@@ -36,7 +36,7 @@ void Sequencer::setTT(TransitionTable* tt) {
     }
     tt_[start][-1] = prev;
   }
-  showTT();
+  // showTT();
 }
 
 void Sequencer::process(MidiBuffer* midi) {

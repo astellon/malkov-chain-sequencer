@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <fstream>
 
 #include "mcs.h"
 
@@ -38,7 +39,8 @@ void MalkovChainSequencer::readMidiFile() {
 void MalkovChainSequencer::analyse() {
   analyser_.analyse(&tt_, step_);
   seq_.setTT(&tt_);
-  showTT();
+  // showTT();
+  exportTT();
 }
 
 void MalkovChainSequencer::showTT() {
@@ -49,4 +51,17 @@ void MalkovChainSequencer::showTT() {
     }
     std::cout << std::endl;
   }
+}
+
+void MalkovChainSequencer::exportTT() {
+  std::cerr << "write file" << std::endl;
+  std::ofstream ofs("malkov.dot");
+  if (ofs.fail()) std::cerr << "cannot opne file" << std::endl;
+  ofs << "digraph malkov {" << std::endl;
+  for (auto row : tt_) {
+    for (auto value : row.second) {
+      ofs << row.first << " -> " << value.first << " [label = " << value.second << "];" << std::endl;;
+    }
+  }
+  ofs << "}" << std::endl;
 }
