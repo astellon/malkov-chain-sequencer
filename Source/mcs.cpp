@@ -8,8 +8,12 @@ MalkovChainSequencer::MalkovChainSequencer() : step_(0.25) {}
 MalkovChainSequencer::~MalkovChainSequencer() {}
 
 void MalkovChainSequencer::buttonClicked(Button* button) {
-  if (button->getName() == "choose_button") {
+  auto name = button->getName();
+
+  if (name == "choose_button") {
     readMidiFile();
+  } else if (name == "start_button") {
+    seq_.start();
   }
 }
 

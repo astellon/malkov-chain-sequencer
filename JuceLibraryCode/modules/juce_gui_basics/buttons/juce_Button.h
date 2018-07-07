@@ -482,6 +482,8 @@ private:
     ListenerList<Listener> buttonListeners;
 
     struct CallbackHelper;
+    friend struct CallbackHelper;
+    friend struct ContainerDeletePolicy<CallbackHelper>;
     std::unique_ptr<CallbackHelper> callbackHelper;
     uint32 buttonPressTime = 0, lastRepeatTime = 0;
     ApplicationCommandManager* commandManagerToUse = nullptr;

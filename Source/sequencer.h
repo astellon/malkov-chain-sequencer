@@ -33,6 +33,7 @@ class Sequencer {
   double seconds_per_block_;
   double seconds_per_step_;
   double time_;
+  int held_note_;
   int note_;
   StepState state_;
 

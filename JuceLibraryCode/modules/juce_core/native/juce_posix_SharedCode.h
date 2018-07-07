@@ -428,14 +428,11 @@ bool File::setFileTimesInternal (int64 modificationTime, int64 accessTime, int64
 
 bool File::deleteFile() const
 {
-    if (! isSymbolicLink())
-    {
-        if (! exists())
-            return true;
+    if (! exists() && ! isSymbolicLink())
+        return true;
 
-        if (isDirectory())
-            return rmdir (fullPath.toUTF8()) == 0;
-    }
+    if (isDirectory())
+        return rmdir (fullPath.toUTF8()) == 0;
 
     return remove (fullPath.toUTF8()) == 0;
 }

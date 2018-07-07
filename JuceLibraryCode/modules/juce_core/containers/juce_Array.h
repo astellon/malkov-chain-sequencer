@@ -274,8 +274,7 @@ public:
             return data.elements[index];
         }
 
-        // We can't default aggregate initialise here "{}" due to a VS2017 compiler bug
-        return ElementType();
+        return {};
     }
 
     /** Returns one of the elements in the array, without checking the index passed in.
@@ -323,7 +322,7 @@ public:
             return data.elements[0];
         }
 
-        return ElementType();
+        return {};
     }
 
     /** Returns the last element in the array, or a default value if the array is empty.
@@ -340,7 +339,7 @@ public:
             return data.elements[numUsed - 1];
         }
 
-        return ElementType();
+        return {};
     }
 
     /** Returns a pointer to the actual array data.
@@ -891,7 +890,7 @@ public:
             return removed;
         }
 
-        return ElementType();
+        return {};
     }
 
     /** Removes an element from the array.

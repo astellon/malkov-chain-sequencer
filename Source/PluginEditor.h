@@ -34,6 +34,7 @@ private:
     MalkovAudioProcessor& processor;
 
     TextButton choose_button_;
+    TextButton start_button_;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MalkovAudioProcessorEditor)
 };

@@ -157,6 +157,8 @@ void MalkovAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&
 
         // ..do something to the data...
     }
+
+    mcs_.process(&midiMessages);
 }
 
 //==============================================================================

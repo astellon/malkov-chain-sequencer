@@ -73,21 +73,9 @@ public:
     };
 
     //==============================================================================
-    struct SharedKeyWindow : public ReferenceCountedObject
+    class SharedKeyWindow : public ReferenceCountedObject
     {
-        SharedKeyWindow (ComponentPeer* peerToUse)
-            : keyPeer (peerToUse),
-              keyProxy (juce_createKeyProxyWindow (keyPeer))
-        {}
-
-        ~SharedKeyWindow()
-        {
-            juce_deleteKeyProxyWindow (keyPeer);
-
-            auto& keyWindows = getKeyWindows();
-            keyWindows.remove (keyPeer);
-        }
-
+    public:
         using Ptr = ReferenceCountedObjectPtr<SharedKeyWindow>;
 
         //==============================================================================
@@ -122,6 +110,21 @@ public:
 
     private:
         //==============================================================================
+        friend struct ContainerDeletePolicy<SharedKeyWindow>;
+
+        SharedKeyWindow (ComponentPeer* peerToUse)
+            : keyPeer (peerToUse),
+              keyProxy (juce_createKeyProxyWindow (keyPeer))
+        {}
+
+        ~SharedKeyWindow()
+        {
+            juce_deleteKeyProxyWindow (keyPeer);
+
+            auto& keyWindows = getKeyWindows();
+            keyWindows.remove (keyPeer);
+        }
+
         ComponentPeer* keyPeer;
         Window keyProxy;
 

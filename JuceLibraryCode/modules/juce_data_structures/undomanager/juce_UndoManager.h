@@ -246,6 +246,7 @@ public:
 private:
     //==============================================================================
     struct ActionSet;
+    friend struct ContainerDeletePolicy<ActionSet>;
     OwnedArray<ActionSet> transactions, stashedFutureTransactions;
     String newTransactionName;
     int totalUnitsStored = 0, maxNumUnitsToKeep = 0, minimumTransactionsToKeep = 0, nextIndex = 0;

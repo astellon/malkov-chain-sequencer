@@ -220,6 +220,8 @@ namespace LiveConstantEditor
         OwnedArray<CodeDocument> documents;
         Array<File> documentFiles;
         class EditorWindow;
+        friend class EditorWindow;
+        friend struct ContainerDeletePolicy<EditorWindow>;
         Component::SafePointer<EditorWindow> editorWindow;
         CriticalSection lock;
 

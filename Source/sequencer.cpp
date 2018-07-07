@@ -5,7 +5,9 @@
 namespace MCS {
 
 Sequencer::Sequencer() : sample_rate_(DEFAULT_SAMPLE_RATE), bpm_(DEFAULT_BPM),
-                         step_(DEFAULT_STEP), time_(0) {}
+                         step_(DEFAULT_STEP), time_(0) {
+  seconds_per_step_ = 60 / bpm_ * step_;
+}
 
 void Sequencer::setSampleRate(double sample_rate, int num_samples) {
   sample_rate_ = sample_rate;
@@ -47,18 +49,23 @@ void Sequencer::process(MidiBuffer* midi) {
 
 void Sequencer::goNextStep(MidiBuffer* midi) {
   int offset = time_ / sample_rate_;
+  int next_note = -1;
   switch (state_) {
     case StepState::started:
       note_ = transition(-1);
-      // if note is rest or sustain
       midi->addEvent(MidiMessage::noteOn(1, note_, 1.0f), offset);
       state_ = StepState::playing;
       break;
     case StepState::playing:
-      midi->addEvent(MidiMessage::noteOff(1, note_), offset);
-      note_ = transition(note_);
-      // if note is rest or sustain
-      midi->addEvent(MidiMessage::noteOn(1, note_, 1.0f), offset);
+      next_note = transition(note_);
+      if (next_note != MCS::SUSTAIN && note_ != MCS::REST) {
+        midi->addEvent(MidiMessage::noteOff(1, held_note_), offset);
+      }
+      if (next_note != MCS::SUSTAIN && next_note != MCS::REST) {
+        midi->addEvent(MidiMessage::noteOn(1, next_note, 1.0f), offset);
+        held_note_ = next_note;
+      }
+      note_ = next_note;
       break;
     case StepState::stopped:
       midi->addEvent(MidiMessage::noteOff(1, note_), offset);

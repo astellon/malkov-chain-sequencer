@@ -230,6 +230,8 @@ protected:
 private:
     //==============================================================================
     class DragImageComponent;
+    friend class DragImageComponent;
+    friend struct ContainerDeletePolicy<DragImageComponent>;
     OwnedArray<DragImageComponent> dragImageComponents;
 
     const MouseInputSource* getMouseInputSourceForDrag (Component* sourceComponent, const MouseInputSource* inputSourceCausingDrag);

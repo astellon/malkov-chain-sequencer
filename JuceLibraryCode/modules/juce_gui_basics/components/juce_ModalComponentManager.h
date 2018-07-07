@@ -141,9 +141,10 @@ protected:
 
 private:
     //==============================================================================
-    friend class Component;
-
     struct ModalItem;
+
+    friend class Component;
+    friend struct ContainerDeletePolicy<ModalItem>;
     OwnedArray<ModalItem> stack;
 
     void startModal (Component*, bool autoDelete);
