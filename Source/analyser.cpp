@@ -37,7 +37,7 @@ void Analyser::analyse(TransitionTable* tt, const MidiMessageSequence& midi, dou
   bool is_pressed = false;
   int last_note = -1;
   double last_time = 0;
-  int max_rest = 0;
+  int max_rest = 4 * MAX_REST_LENGTH;;
 
   auto num_events = midi.getNumEvents();
   for (int k = 0; k != num_events; k++) {
@@ -57,7 +57,7 @@ void Analyser::analyse(TransitionTable* tt, const MidiMessageSequence& midi, dou
           (*tt)[-1][n]++;
         } else {
           (*tt)[last_note][REST]++;
-          (*tt)[REST][REST] += length - 1;
+          (*tt)[REST][REST] += length - 1; 
           (*tt)[REST][n]++;
         }
   
@@ -81,7 +81,6 @@ void Analyser::analyse(TransitionTable* tt, const MidiMessageSequence& midi, dou
       }
     } else if (msg.isTempoMetaEvent()) {
       seconds_per_quarter_note = msg.getTempoSecondsPerQuarterNote();
-      max_rest = 4 * MAX_REST_LENGTH;
     }
   }
 }
