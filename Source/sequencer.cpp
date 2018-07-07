@@ -52,7 +52,7 @@ void Sequencer::goNextStep(MidiBuffer* midi) {
   int next_note = -1;
   switch (state_) {
     case StepState::started:
-      note_ = transition(-1);
+      held_note_ = note_ = transition(-1);
       midi->addEvent(MidiMessage::noteOn(1, note_, 1.0f), offset);
       state_ = StepState::playing;
       break;
@@ -70,6 +70,7 @@ void Sequencer::goNextStep(MidiBuffer* midi) {
     case StepState::stopped:
       midi->addEvent(MidiMessage::noteOff(1, note_), offset);
       note_ = -1;
+      held_note_ = -1;
       state_ = StepState::stop;
       break;
     case StepState::stop:
@@ -80,6 +81,9 @@ void Sequencer::goNextStep(MidiBuffer* midi) {
 
 int Sequencer::transition(int num) {
   int n = tt_[num][-1];
+  if (n == 1) {
+    return tt_[num].lower_bound(n)->second;
+  }
   std::random_device seed_gen;
   std::default_random_engine engine(seed_gen());
   std::uniform_int_distribution<> dist(1, n);
