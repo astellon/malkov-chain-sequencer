@@ -37,6 +37,7 @@ void MalkovChainSequencer::readMidiFile() {
 }
 
 void MalkovChainSequencer::analyse() {
+  tt_.clear();
   analyser_.analyse(&tt_, step_);
   seq_.setTT(&tt_);
   // showTT();
@@ -58,9 +59,30 @@ void MalkovChainSequencer::exportTT() {
   std::ofstream ofs("malkov.dot");
   if (ofs.fail()) std::cerr << "cannot opne file" << std::endl;
   ofs << "digraph malkov {" << std::endl;
+  ofs << "graph [ layout = circo ];" << std::endl;
   for (auto row : tt_) {
+    juce::String from;
+    if (row.first == -1) {
+      from = "START";
+    }else if (row.first == MCS::REST) {
+      from = "REST";
+    } else if (row.first == MCS::SUSTAIN) {
+      from = "SUSTAIN";
+    } else {
+      from = MidiMessage::getMidiNoteName(row.first, true, true, 4);
+    }
     for (auto value : row.second) {
-      ofs << row.first << " -> " << value.first << " [label = " << value.second << "];" << std::endl;;
+      juce::String to;
+      if (value.first == MCS::EXIT_SUSTAIN) {
+        to = "EXIT SUSTAIN";
+      } else if (value.first == MCS::REST) {
+        to = "REST";
+      } else if (value.first == MCS::SUSTAIN) {
+        to = "SUSTAIN";
+      } else {
+        to = MidiMessage::getMidiNoteName(value.first, true, true, 4);
+      }
+      ofs << "\"" << from << "\" -> \"" << to << "\" [label = " << value.second << "];" << std::endl;;
     }
   }
   ofs << "}" << std::endl;

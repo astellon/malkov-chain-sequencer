@@ -25,6 +25,13 @@ pkg_search_module (XINERAMA REQUIRED xinerama)
 pkg_search_module (WEBKIT2GTK-4.0 REQUIRED webkit2gtk-4.0)
 pkg_search_module (GTK+-X11-3.0 REQUIRED gtk+-x11-3.0)
 
+add_library (VST MODULE
+    "../../JuceLibraryCode/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp"
+    "../../JuceLibraryCode/include_juce_audio_plugin_client_VST2.cpp"
+)
+
+set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp" PROPERTIES HEADER_FILE_ONLY TRUE)
+
 add_executable (STANDALONE_PLUGIN
     "../../JuceLibraryCode/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp"
     "../../JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp"
@@ -2672,6 +2679,9 @@ set_source_files_properties ("../../../../JUCE/modules/juce_video/juce_video.h" 
 set_source_files_properties ("../../JuceLibraryCode/AppConfig.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties ("../../JuceLibraryCode/JuceHeader.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 
+set_target_properties (VST PROPERTIES PREFIX "")
+set_target_properties (VST PROPERTIES SUFFIX ".so")
+
 set_target_properties (STANDALONE_PLUGIN PROPERTIES SUFFIX "")
 
 set_target_properties (SHARED_CODE PROPERTIES SUFFIX ".a")
@@ -2709,6 +2719,55 @@ find_library (PTHREAD pthread
 find_library (RT rt
 )
 
+set_target_properties (VST PROPERTIES
+    OUTPUT_NAME "malkov"
+    CXX_STANDARD 14
+    CXX_EXTENSIONS OFF
+)
+
+target_compile_definitions (VST PRIVATE
+    LINUX=1
+    DEBUG=1
+    _DEBUG=1
+    JUCER_LINUX_MAKE_6D53C8B4=1
+    JUCE_APP_VERSION=1.0.0
+    JUCE_APP_VERSION_HEX=0x10000
+    JucePlugin_Build_VST=1
+    JucePlugin_Build_VST3=0
+    JucePlugin_Build_AU=0
+    JucePlugin_Build_AUv3=0
+    JucePlugin_Build_RTAS=0
+    JucePlugin_Build_AAX=0
+    JucePlugin_Build_Standalone=0
+    JucePlugin_Build_Unity=0
+)
+
+target_compile_options (VST PRIVATE
+    -fPIC
+    -fvisibility=hidden
+)
+
+target_link_libraries (VST PRIVATE
+    SHARED_CODE
+    -march=native
+    -shared
+    -Wl,--no-undefined
+    ${GL}
+    ${DL}
+    ${PTHREAD}
+    ${RT}
+    ${ALSA_LIBRARIES}
+    ${FREETYPE2_LIBRARIES}
+    ${LIBCURL_LIBRARIES}
+    ${X11_LIBRARIES}
+    ${XEXT_LIBRARIES}
+    ${XINERAMA_LIBRARIES}
+    ${WEBKIT2GTK-4.0_LIBRARIES}
+    ${GTK+-X11-3.0_LIBRARIES}
+)
+
+add_dependencies (VST SHARED_CODE)
+
 set_target_properties (STANDALONE_PLUGIN PROPERTIES
     OUTPUT_NAME "malkov"
     CXX_STANDARD 14
@@ -2764,7 +2823,7 @@ target_compile_definitions (SHARED_CODE PRIVATE
     JUCER_LINUX_MAKE_6D53C8B4=1
     JUCE_APP_VERSION=1.0.0
     JUCE_APP_VERSION_HEX=0x10000
-    JucePlugin_Build_VST=0
+    JucePlugin_Build_VST=1
     JucePlugin_Build_VST3=0
     JucePlugin_Build_AU=0
     JucePlugin_Build_AUv3=0
@@ -2791,7 +2850,7 @@ target_link_libraries (SHARED_CODE PRIVATE
     ${GTK+-X11-3.0_LIBRARIES}
 )
 
-set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=native -pthread -g -ggdb -O0")
+set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=native -pthread -fPIC -g -ggdb -O0")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_C_FLAGS} ")
 
 endif (CMAKE_BUILD_TYPE STREQUAL Debug)
@@ -2829,6 +2888,55 @@ find_library (PTHREAD pthread
 find_library (RT rt
 )
 
+set_target_properties (VST PROPERTIES
+    OUTPUT_NAME "malkov"
+    CXX_STANDARD 14
+    CXX_EXTENSIONS OFF
+)
+
+target_compile_definitions (VST PRIVATE
+    LINUX=1
+    NDEBUG=1
+    JUCER_LINUX_MAKE_6D53C8B4=1
+    JUCE_APP_VERSION=1.0.0
+    JUCE_APP_VERSION_HEX=0x10000
+    JucePlugin_Build_VST=1
+    JucePlugin_Build_VST3=0
+    JucePlugin_Build_AU=0
+    JucePlugin_Build_AUv3=0
+    JucePlugin_Build_RTAS=0
+    JucePlugin_Build_AAX=0
+    JucePlugin_Build_Standalone=0
+    JucePlugin_Build_Unity=0
+)
+
+target_compile_options (VST PRIVATE
+    -fPIC
+    -fvisibility=hidden
+)
+
+target_link_libraries (VST PRIVATE
+    SHARED_CODE
+    -march=native
+    -shared
+    -Wl,--no-undefined
+    -fvisibility=hidden
+    ${GL}
+    ${DL}
+    ${PTHREAD}
+    ${RT}
+    ${ALSA_LIBRARIES}
+    ${FREETYPE2_LIBRARIES}
+    ${LIBCURL_LIBRARIES}
+    ${X11_LIBRARIES}
+    ${XEXT_LIBRARIES}
+    ${XINERAMA_LIBRARIES}
+    ${WEBKIT2GTK-4.0_LIBRARIES}
+    ${GTK+-X11-3.0_LIBRARIES}
+)
+
+add_dependencies (VST SHARED_CODE)
+
 set_target_properties (STANDALONE_PLUGIN PROPERTIES
     OUTPUT_NAME "malkov"
     CXX_STANDARD 14
@@ -2883,7 +2991,7 @@ target_compile_definitions (SHARED_CODE PRIVATE
     JUCER_LINUX_MAKE_6D53C8B4=1
     JUCE_APP_VERSION=1.0.0
     JUCE_APP_VERSION_HEX=0x10000
-    JucePlugin_Build_VST=0
+    JucePlugin_Build_VST=1
     JucePlugin_Build_VST3=0
     JucePlugin_Build_AU=0
     JucePlugin_Build_AUv3=0
@@ -2911,7 +3019,7 @@ target_link_libraries (SHARED_CODE PRIVATE
     ${GTK+-X11-3.0_LIBRARIES}
 )
 
-set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=native -pthread -O3")
+set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=native -pthread -fPIC -O3")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_C_FLAGS} ")
 
 endif (CMAKE_BUILD_TYPE STREQUAL Release)

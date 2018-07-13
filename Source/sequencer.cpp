@@ -80,6 +80,7 @@ void Sequencer::goNextStep(MidiBuffer* midi) {
 }
 
 int Sequencer::transition(int num) {
+  if (num == REST) return transition(held_note_);
   int n = tt_[num][-1];
   if (n == 1) {
     return tt_[num].lower_bound(n)->second;
@@ -88,8 +89,9 @@ int Sequencer::transition(int num) {
   std::default_random_engine engine(seed_gen());
   std::uniform_int_distribution<> dist(1, n);
   n = dist(engine);
-  auto to = tt_[num].lower_bound(n);
-  return to->second;
+  auto to = tt_[num].lower_bound(n)->second;
+  if (to == EXIT_SUSTAIN) return transition(held_note_);
+  return to;
 }
 
 void Sequencer::showTT() {

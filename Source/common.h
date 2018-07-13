@@ -6,9 +6,14 @@ namespace MCS {
 
 using TransitionTable = std::map<int, std::map<int, int>>;
 
-const int SIZE = 130;
-const int SUSTAIN = 128;
-const int REST = 129;
+enum NOTE {
+  START = -1,
+  SUSTAIN = 128,
+  REST,
+  EXIT_SUSTAIN,
+  SIZE
+};
+
 const int MAX_REST_LENGTH = 1;
 
 const double DEFAULT_SAMPLE_RATE = 44100;
